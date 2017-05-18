@@ -1,4 +1,3 @@
-import Data.List
 import Data.Maybe
 
 mapping :: [(Char, Char)]
