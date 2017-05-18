@@ -1,6 +1,5 @@
 import Data.List
 import Data.Maybe
-import System.IO
 
 mapping :: [(Char, Char)]
 mapping = zip ['a'..'z'] ['z', 'y'..]
@@ -13,8 +12,7 @@ atbashCipher = map charComplement
 
 main :: IO ()
 main = do
-    handle <- openFile "input.txt" ReadMode
-    contents <- hGetContents handle
+    contents <- readFile "input.txt"
     let cipherText = atbashCipher contents
     putStr cipherText
 
