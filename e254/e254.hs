@@ -1,15 +1,14 @@
 import Data.List
+import Data.Maybe
 import System.IO
 
 mapping :: [(Char, Char)]
 mapping = zip ['a'..'z'] ['z', 'y'..]
 
 charComplement :: Char -> Char
-charComplement c = case lookup c mapping of
-    Just a -> a
-    Nothing -> c
+charComplement c = fromMaybe c (lookup c mapping)
 
-atbashCipher :: [Char] -> [Char]
+atbashCipher :: String -> String
 atbashCipher = map charComplement
 
 main :: IO ()
