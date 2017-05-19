@@ -14,4 +14,3 @@ main = do
     contents <- readFile "input.txt"
     let cipherText = atbashCipher contents
     putStr cipherText
-
