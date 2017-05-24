@@ -27,10 +27,10 @@ doChallenge s = (map . map) pprint (genGrid n edges)
     pprint _ = '0'
 
 input :: [String]
-input = ["5 5", "0 -> 1", "1 -> 2", "2 -> 4", "3 -> 4", "0 -> 3"]
+input = ["5 5", "0 3 -> 1", "1 -> 2", "2 -> 4", "3 -> 4", "0 -> 0 3"]
 
 output :: [String]
-output = ["01010", "00100", "00001", "00001", "00000"]
+output = ["11010", "00100", "00001", "01001", "00000"]
 
 main :: IO ()
 main = print $ output == doChallenge input
