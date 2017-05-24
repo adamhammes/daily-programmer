@@ -4,7 +4,7 @@ digits i = digits (i `div` 10) ++ [i `mod` 10]
 
 digitSum :: Integer -> Integer
 digitSum i
-  | i `div` 10 == 0 = i
+  | i < 10 = i
   | otherwise = digitSum $ sum (digits i)
 
 inputs :: [(Integer, Integer)]
