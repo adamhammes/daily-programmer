@@ -1,15 +1,11 @@
-import Data.Function
-import Data.Ix
-import Data.List
 import qualified Data.Set as Set
 
 type Edge = (Integer, Integer)
 
-genGrid :: Integer -> Set.Set Edge -> [[Bool]]
-genGrid n edges = (map . map) (`Set.member` edges) grid
+genGrid :: Integer -> (Edge -> Bool) -> [[Bool]]
+genGrid n exists = (map . map) exists grid
   where
-    grid = groupBy ((==) `on` fst) coords
-    coords = range ((0, 0), (n - 1, n - 1))
+    grid = [[(x, y) | y <- [0 .. n - 1]] | x <- [0 .. n - 1]]
 
 parseEdge :: String -> [Edge]
 parseEdge s = [(from, to) | from <- outgoing, to <- incoming]
@@ -19,10 +15,10 @@ parseEdge s = [(from, to) | from <- outgoing, to <- incoming]
     split = words s
 
 doChallenge :: [String] -> [String]
-doChallenge s = (map . map) pprint (genGrid n edges)
+doChallenge (meta:inputs) = (map . map) pprint (genGrid n (`Set.member` edges))
   where
-    n = read (head $ words $ head s)
-    edges = Set.fromList $ concatMap parseEdge (drop 1 s)
+    n = read $ head $ words meta
+    edges = Set.fromList $ concatMap parseEdge inputs
     pprint True = '1'
     pprint _ = '0'
 
